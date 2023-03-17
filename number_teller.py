@@ -4,6 +4,7 @@ root = Tk()
 root.title('Number Speller')
 root.config(bg='sky blue')
 root.geometry('1300x400')
+root.iconbitmap(r'Name-Speller\100.ico')
 
 
 unit = {0: '', 3: 'Thousand', 6: 'Million', 9: 'Billion', 12: 'Trillion', 15: 'Quadrillion', 18: 'Quintillion'}
