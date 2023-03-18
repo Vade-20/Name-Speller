@@ -35,8 +35,8 @@ def backspace():
     e1.delete(len(number)-1,END)
 
 def check(num):
-    if (num.char).isalpha():
-        from tkinter import messagebox
+    from tkinter import messagebox
+    if (num.char).isalpha():      
         error = messagebox.showerror('Error','Please enter a proper positive natural number without , or underscore ')
         reset()
     for i in num.char:
@@ -53,7 +53,7 @@ def find(n):
     number = ''
     if len(n) > 21:
             from tkinter import messagebox
-            messagebox.ERROR("Error",'The number is too large enter a number in Quintillion ')
+            messagebox.showerror("Error",'The number is too large enter a number in Quintillion ')
             return None
     while len(n) != 0:
         a = a - 3       
