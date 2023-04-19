@@ -2,9 +2,12 @@ from tkinter import *
 
 root = Tk()
 root.title('Number Speller')
-root.config(bg='sky blue')
 root.geometry('1300x400')
-root.iconbitmap(r'Number-Speller\100.ico')
+
+try:
+    root.iconbitmap(r'Number-Speller\100.ico')
+except:
+    pass
 
 
 unit = {0: '', 3: 'Thousand', 6: 'Million', 9: 'Billion', 12: 'Trillion', 15: 'Quadrillion', 18: 'Quintillion'}
@@ -17,18 +20,23 @@ def reset(n=None):
     global e1,l5
     e1.delete(0,END)
     l5.delete('1.0','end')
-    root.bind('<Return>',teller)
+
 
 def teller(n=None):
     global e1,l5
     global e1 
-    number = find(e1.get())
+    l5.delete('1.0','end')
+    ans = ''
+    for i in e1.get():
+        if i not in ['_',',']:
+            ans+=i
+    number = find(ans)
     l5.insert(END,number)
-    num = int(e1.get())
+    num = int(ans)
     num = f'{num:,}'
     e1.delete(0,END)
     e1.insert(0,num)
-    root.bind('<Return>',reset)
+
 
 def backspace():
     number = str(e1.get())
@@ -40,8 +48,8 @@ def check(num):
         error = messagebox.showerror('Error','Please enter a proper positive natural number without , or underscore ')
         reset()
     for i in num.char:
-        if i in  ['[',']','{','}','/','<','.','>','?',':',';','-','_','+','=',',']:
-            error = messagebox.showerror('Error','Please enter a proper positive natural number without , or underscore')
+        if i in  ['[',']','{','}','/','<','.','>','?',':',';','-','+','=',]:
+            error = messagebox.showerror('Error','Please enter a proper positive natural number')
             reset()
 
 
@@ -82,28 +90,29 @@ def find(n):
         n = str(n)
     return number    
 
-l1 = Label(root,text='Number speller',fg='gold',bg='sky blue', padx=250, font=('Comic Sans MS', '40'),
+l1 = Label(root,text='Number speller',fg='blue', padx=250, font=('Comic Sans MS', '40'),
                )
 l1.grid(row=0,column=0,columnspan=3)
-l2 = Label(root,text='Enter the number-',fg='gold',bg='sky blue', font=('Comic Sans MS', '20'),
+l2 = Label(root,text='Enter the number-',fg='blue', font=('Comic Sans MS', '20'),
                )
 l2.grid(row=1,column=0)
-e1 = Entry(root, fg='gold',bg='light sky blue',font=('Comic Sans MS', '20'), width=45, borderwidth=2)
+e1 = Entry(root, fg='blue',bg='light grey',font=('Comic Sans MS', '20'), width=45, borderwidth=2)
 e1.grid(row =1,column=1,columnspan=2)
-l3 = Label(root,text='-'*80,fg='gold',bg='sky blue', font=('Comic Sans MS', '20'),              )
+l3 = Label(root,text='-'*80,fg='blue', font=('Comic Sans MS', '20'),              )
 l3.grid(row=2,column=0,columnspan=3)
-b1 = Button(root,text = 'Reset',fg='gold',bg='sky blue',font= ('Comic Sans MS', '20'),command=reset,width=15,)
+b1 = Button(root,text = 'Reset',fg='blue',font= ('Comic Sans MS', '20'),command=reset,width=15,)
 b1.grid(row=3,column=0,sticky=W+E)
-b2 = Button(root,text = 'Enter',fg='gold',bg='sky blue',font= ('Comic Sans MS', '20'),command=teller,width=20,)
+b2 = Button(root,text = 'Enter',fg='blue',font= ('Comic Sans MS', '20'),command=teller,width=20,)
 b2.grid(row=3,column=2,sticky=W+E)
-b3 = Button(root,text = 'Backspace',fg='gold',bg='sky blue',font= ('Comic Sans MS', '20'),command=backspace,width=20,)
+b3 = Button(root,text = 'Backspace',fg='blue',font= ('Comic Sans MS', '20'),command=backspace,width=20,)
 b3.grid(row=3,column=1,sticky=W+E)
-l4 = Label(root,text='-'*80,fg='gold',bg='sky blue', font=('Comic Sans MS', '20'),              )
+l4 = Label(root,text='-'*80,fg='blue', font=('Comic Sans MS', '20'),              )
 l4.grid(row=4,column=0,columnspan=3)
-l5 = Text(root,fg='gold',bg='sky blue', font=('Comic Sans MS', '20'), wrap='word')
+l5 = Text(root,fg='blue', bg='light grey',font=('Comic Sans MS', '20'), wrap='word')
 l5.insert(END,'')
 l5.grid(row=5,column=0,columnspan=3)
-l4 = Label(root,text='',fg='gold',bg='sky blue', font=('Comic Sans MS', '20'),              )
+l4 = Label(root,text='',fg='blue',bg='light grey', font=('Comic Sans MS', '20'),)
+
 l4.grid(row=6,column=0,columnspan=3)
 root.bind('<Key>',check)
 root.bind('<Return>',teller)
