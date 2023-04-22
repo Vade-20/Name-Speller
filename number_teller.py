@@ -3,6 +3,7 @@ from tkinter import *
 root = Tk()
 root.title('Number Speller')
 root.geometry('1300x400')
+root.resizable(height=False,width=False)
 
 try:
     root.iconbitmap(r'Number-Speller\100.ico')
@@ -55,7 +56,6 @@ def check(num):
 
 
 def find(n):
-    n = int(n)
     a = 21
     n = str(n)
     number = ''
@@ -63,6 +63,9 @@ def find(n):
             from tkinter import messagebox
             messagebox.showerror("Error",'The number is too large enter a number in Quintillion ')
             return None
+    if n=='0':
+        return 'Zero'
+    
     while len(n) != 0:
         a = a - 3       
         if len(n) > a:
