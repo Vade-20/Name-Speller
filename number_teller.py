@@ -31,13 +31,15 @@ def teller(n=None):
     for i in e1.get():
         if i not in ['_',',']:
             ans+=i
-    number = find(ans)
-    l5.insert(END,number)
-    num = int(ans)
-    num = f'{num:,}'
-    e1.delete(0,END)
-    e1.insert(0,num)
-
+    try:
+        number = find(ans)
+        l5.insert(END,number)
+        num = int(ans)
+        num = f'{num:,}'
+        e1.delete(0,END)
+        e1.insert(0,num)
+    except:
+        pass
 
 def backspace():
     number = str(e1.get())
@@ -61,7 +63,8 @@ def find(n):
     number = ''
     if len(n) > 21:
             from tkinter import messagebox
-            messagebox.showerror("Error",'The number is too large enter a number in Quintillion ')
+            messagebox.showerror("Error",'Please enter a number smaller than 999 Quintillion')
+            reset()
             return None
     if n=='0':
         return 'Zero'
