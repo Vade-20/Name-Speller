@@ -10,12 +10,12 @@ try:
 except:
     pass
 
-
 unit = {0: '', 3: 'Thousand', 6: 'Million', 9: 'Billion', 12: 'Trillion', 15: 'Quadrillion', 18: 'Quintillion'}
 ones = {1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', 5: 'Five', 6: 'Six', 7: 'Seven', 8: 'Eight', 9: 'Nine',0:''}
 one_11 = {1: 'Eleven', 2: 'Twelve', 3: 'Thirteen', 4: 'Fourteen', 5: 'Fifteen', 6: 'Sixteen', 7: 'Seventeen',
           8: 'Eighteen', 9: 'Nineteen', 0: 'Ten'}
 tens = {2: 'Twenty', 3: 'Thirty', 4: 'Forty', 5: 'Fifty', 6: 'Sixty', 7: 'Seventy', 8: 'Eighty', 9: 'Ninety', 0: ''}
+
 
 def reset(n=None):
     global e1,l5
@@ -26,24 +26,21 @@ def reset(n=None):
 def teller(n=None):
     global e1,l5
     global e1 
-    l5.delete('1.0','end')
-    ans = ''
-    for i in e1.get():
-        if i not in ['_',',']:
-            ans+=i
+    number = find(e1.get())
     try:
-        number = find(ans)
         l5.insert(END,number)
-        num = int(ans)
+        num = int(e1.get())
         num = f'{num:,}'
         e1.delete(0,END)
         e1.insert(0,num)
+        root.bind('<Return>',reset)
     except:
         pass
 
 def backspace():
     number = str(e1.get())
     e1.delete(len(number)-1,END)
+
 
 def check(num):
     from tkinter import messagebox
@@ -52,7 +49,7 @@ def check(num):
         reset()
     for i in num.char:
         if i in  ['[',']','{','}','/','<','.','>','?',':',';','-','+','=',]:
-            error = messagebox.showerror('Error','Please enter a proper positive natural number')
+            messagebox.showerror('Error','Please enter a proper positive natural number')
             reset()
 
 
